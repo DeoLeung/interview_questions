@@ -57,6 +57,7 @@ TESTFILES= \
 	${TESTDIR}/TestFiles/f1 \
 	${TESTDIR}/TestFiles/f10 \
 	${TESTDIR}/TestFiles/f11 \
+	${TESTDIR}/TestFiles/f12 \
 	${TESTDIR}/TestFiles/f2 \
 	${TESTDIR}/TestFiles/f3 \
 	${TESTDIR}/TestFiles/f4 \
@@ -172,6 +173,10 @@ ${TESTDIR}/TestFiles/f11: ${TESTDIR}/tests/question_11_test.o ${OBJECTFILES:%.o=
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f11 $^ ${LDLIBSOPTIONS} 
 
+${TESTDIR}/TestFiles/f12: ${TESTDIR}/tests/question_12_test.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.cc}   -o ${TESTDIR}/TestFiles/f12 $^ ${LDLIBSOPTIONS} 
+
 ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/question_2_test.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.cc}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} 
@@ -221,6 +226,12 @@ ${TESTDIR}/tests/question_11_test.o: tests/question_11_test.cpp
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/question_11_test.o tests/question_11_test.cpp
+
+
+${TESTDIR}/tests/question_12_test.o: tests/question_12_test.cpp 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -I. -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/question_12_test.o tests/question_12_test.cpp
 
 
 ${TESTDIR}/tests/question_2_test.o: tests/question_2_test.cpp 
@@ -447,6 +458,7 @@ ${OBJECTDIR}/question_9_nomain.o: ${OBJECTDIR}/question_9.o question_9.cpp
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	    ${TESTDIR}/TestFiles/f10 || true; \
 	    ${TESTDIR}/TestFiles/f11 || true; \
+	    ${TESTDIR}/TestFiles/f12 || true; \
 	    ${TESTDIR}/TestFiles/f2 || true; \
 	    ${TESTDIR}/TestFiles/f3 || true; \
 	    ${TESTDIR}/TestFiles/f4 || true; \

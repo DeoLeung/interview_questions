@@ -8,12 +8,13 @@
 #ifndef QUESTION_12_H
 #define	QUESTION_12_H
 
+#include <string>
 #include <vector>
 
 using namespace std;
 
 namespace question_12 {
-  bool findWordInMatrix(const vector<vector<int> > &matrix, const string &word);
+  bool findWordInMatrix(const vector<vector<char> > &matrix, const string &word);
 }
 
 
